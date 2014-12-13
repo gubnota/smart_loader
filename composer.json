@@ -16,8 +16,7 @@
     },
     "require-dev": {
     },
-
-    "autoload": {
-        "files": ["Gubnota/Gubnota.php","g.php","John/Doe.php"]
-    }
+//    "autoload": {
+//        "files": ["Gubnota/Gubnota.php","g.php","John/Doe.php"]
+//    }
 }

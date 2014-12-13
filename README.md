@@ -5,9 +5,9 @@ using Laravel 4 alike mechanism via pseudo-static
 calling and by-pass variables to other method 
 which simplifies storing same class instace 
 without using global keyword quite outdated 
-solution. With composer pakagist psr-0 autoloader 
+solution. With composer pakagist psr-4 autoloader 
 use better, otherwise please declare autoloading 
-in psr-0 (or 4) PHP default order by looking via 
+in psr-4 PHP default order by looking via 
 folder alike class namespaces.
 
 ## Installing
@@ -22,7 +22,7 @@ Simply add `gubnota/smart_loader` to your composer.json and run `composer update
 * John/Doe.php - class for calling (with only one public method)
 
 ## Autoload issue
-If you are not gonna use Composer psr-0 standard default autoloading class solution, please 
+If you are not gonna use Composer psr-4 standard default autoloading class solution, please 
 not forget ti use PHP default one by calling:
 
 ```php
@@ -102,3 +102,31 @@ Simply add the libraries to your project's `composer.json` then run `php compose
 ## Config and runtime config
 
 Currently the Gubnota\smart_loader or `g` symlink still lack a lot of config options they should probably accept.
+
+## Troubleshooting
+
+If autoloader not works be sure to inlude in `composer.json` parent project file `autoload` and `config` directives like:
+
+```php
+{
+    "name": "gubnota/your_personal_project",
+    "authors": [
+        {
+            "name": "Vladislav Muravyev",
+            "email": "me@gubnota.ru"
+        }
+    ],
+    "require": {
+        "php" : ">=5.4",
+    	"gubnota/smart_loader": "dev-master"
+    },
+    "min-stability":"dev-master",
+    "config": {
+        "vendor-dir": "./vendor/"
+    },
+    "autoload": {
+        "psr-4": {"": ["app/"]}
+    }
+}
+
+```
