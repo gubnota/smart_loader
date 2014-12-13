@@ -93,7 +93,8 @@ Simply add the libraries to your project's `composer.json` then run `php compose
 ```json
 {
     "require": {
-        "gubnota/smart_loader" : "*",
+        "php" : ">=5.4",
+        "gubnota/smart_loader" : "*"
     }
 }
 ```
