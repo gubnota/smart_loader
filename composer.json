@@ -18,8 +18,9 @@
     },
 
     "autoload": {
-    "psr-4": {
-    "Gubnota\\":"Gubnota/",
-    "\\":""
+        "psr-4": {
+        "Gubnota\\":"Gubnota/",
+        "\\":""
+        }
     }
 }
