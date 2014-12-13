@@ -1,6 +1,7 @@
 {
     "name": "gubnota/smart_loader",
     "description": "More srightforward way to call pseudostatically without create every time in every new file new class instance",
+    "keywords": ["autoload", "statically", "laravel4", "helper", "PHP"],
     "license": "MIT",
     "authors": [
         {
@@ -11,6 +12,8 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=5.4"
+    },
+    "require-dev": {
     },
     "minimum-stability": "dev"
 }
