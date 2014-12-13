@@ -94,7 +94,7 @@ Simply add the libraries to your project's `composer.json` then run `php compose
 {
     "require": {
         "php" : ">=5.4",
-        "gubnota/smart_loader" : "*"
+        "gubnota/smart_loader": "dev-master"
     }
 }
 ```
