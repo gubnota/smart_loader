@@ -131,4 +131,11 @@ If autoloader not works be sure to inlude in `composer.json` parent project file
 
 ```
 
+You can also autoload files explicily, like:
+```json
+    "autoload": {
+        "files": ["Gubnota/Gubnota.php","g.php","John/Doe.php"]
+    }
+```
+
 * [More information about autoloading configure in composer https://getcomposer.org/doc/04-schema.md#autoload](https://getcomposer.org/doc/04-schema.md#autoload)
