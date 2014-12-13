@@ -18,9 +18,6 @@
     },
 
     "autoload": {
-        "psr-4": {
-        "Gubnota\\":"Gubnota/",
-        "\\":""
-        }
+        "files": ["Gubnota/Gubnota.php","g.php","John/Doe.php"]
     }
 }
