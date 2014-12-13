@@ -15,5 +15,11 @@
         "php": ">=5.4"
     },
     "require-dev": {
+    },
+
+    "autoload": {
+    "psr-4": {
+    "Gubnota\\":"Gubnota/",
+    "\\":""
     }
 }
