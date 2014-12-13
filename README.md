@@ -130,3 +130,5 @@ If autoloader not works be sure to inlude in `composer.json` parent project file
 }
 
 ```
+
+* [More information about autoloading configure in composer https://getcomposer.org/doc/04-schema.md#autoload](https://getcomposer.org/doc/04-schema.md#autoload)
