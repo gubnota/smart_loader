@@ -1,0 +1,15 @@
+{
+    "name": "gubnota/smart_loader",
+    "description": "More srightforward way to call pseudostatically without create every time in every new file new class instance",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vladislav Muravyev",
+            "email": "me@gubnota.ru"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.4"
+    }
+}
