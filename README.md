@@ -27,7 +27,7 @@ not forget ti use PHP default one by calling:
 
 ```php
 // Use default autoload implementation
-// set_include_path(__DIR__);
+// set_include_path( __DIR__ );
 spl_autoload_register();
 ```
 ## Usage
