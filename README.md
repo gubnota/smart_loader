@@ -65,13 +65,13 @@ or:
 ```php
 g::{'John\\Doe'}('write_message_to',
     ['Laura Smith','John Smith','John Marcus','Mark Brown'][rand(0,3)],
-    ['How long it takes for your route to home?','How about we meet next Tuesday?','Hello there.','Are you still there?'][rand(0,3)]);
+    ['How long does it take to reach your house?','How about we meet next Tuesday?','Hello there.','Are you still there?'][rand(0,3)]);
 ```
 or:
 ```php
 g::instance()->{'John\\Doe'}->write_message_to(
     ['Laura Smith','John Smith','John Marcus','Mark Brown'][rand(0,3)],
-    ['How long it takes for your route to home?','How about we meet next Tuesday?','Hello there.','Are you still there?'][rand(0,3)]);
+    ['How long does it take to reach your house?','How about we meet next Tuesday?','Hello there.','Are you still there?'][rand(0,3)]);
 ```
 or:
 
