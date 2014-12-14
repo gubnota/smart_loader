@@ -85,6 +85,27 @@ print "\$instance2->rand = $instance2->rand not equals\n";
 print "\Gubnota\Gubnota::instance()->rand = ".$instance->rand." still equals\n";
 ```
 
+### Facades
+
+For using name with full namespaces rather than write in every file, better to regsiter it with fasades mechanism:
+```php
+g::instance()
+->empty_facade() // empty all facades default name values
+->facade('John','John\Doe') // add default one value included with package
+->facade('Smith','John\Doe') // facades can share same class among different names
+->delete_facade('Smith') // deletes facade name called 'Smith'
+;
+```
+After you register facade, just call it anywhere like:
+```php
+g::instance()
+->facade('sw_sendmail','\Swift_SendmailTransport')
+->facade('sw_smtp','\Swift_SmtpTransport')
+->facade('sw_message','\Swift_Message')
+->facade('sw_malier','\Swift_Mailer')
+g::sw_message;
+```
+
 ## Installing with composer
 
 To be able to use within your composer-powered project, you need to install them via composer.

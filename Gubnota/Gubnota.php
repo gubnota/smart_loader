@@ -23,9 +23,9 @@
 namespace Gubnota;
 class Gubnota
 {
-	public static $globals=[];// для хранения прединициализуемых параметров
+	protected static $globals=[];// для хранения прединициализуемых параметров
 	// API classes symlinks with their namespaces preceding (aka facades in Laravel 4)
-	public $classes = array(
+	protected $classes = array(
 		'John' => 'John\Doe',
 	);
 	
@@ -44,7 +44,7 @@ class Gubnota
 
 	// random number using for recognize whether created instance the same
 	// Случайное число чтобы идентифицировать инстанс оф класс
-	public $rand;
+	protected $rand;
 
 	/**
 	 * Constructor let empty in case or parent::__construct() calls
@@ -64,6 +64,41 @@ class Gubnota
 		if (!static::$app) static::$app = new self();
 		return self::$app;
 	}
+
+	/**
+	 * method to delete classes facades name
+	 * Магический метод для удаления фасадов
+	 */
+	public function delete_facade($name)
+	{
+		if (!empty($name))
+			unset($this->classes[$name]);
+        return $this;
+	}
+
+	/**
+	 * method to delete all classes facades names
+	 * Магический метод для удаления всех фасадов
+	 */
+	public function empty_facade()
+	{
+		$this->classes=[];
+        return $this;
+	}
+
+	/**
+	 * method to get/insert/update classes facades
+	 * Магический метод для получения, создания, замены фасада
+	 */
+	public function facade($name=null, $value = null)
+	{
+		if (!empty($name) && empty($value))
+    	 return (array_key_exists($name, $this->classes) ? $this->classes[$name] : $value);
+		if (!empty($name) && !empty($value))
+			$this->classes[$name]=$value;
+         return $this;
+	}
+
 	/**
 	 * Magic method to create API object
 	 * Магический метод, создает нужный объект API
@@ -72,7 +107,12 @@ class Gubnota
 	{
 		if ($name == 'instance')
 			return self::$app;
-		// If it already exists - return it
+		if ($name == 'rand')
+			return $this->rand;
+		if ($name == 'classes')
+			return (array)$this->classes;
+
+		// If class instance already exists - return it
 		// Если такой объект уже существует, возвращаем его
 		if(isset(self::$objects[$name]))
 		{
