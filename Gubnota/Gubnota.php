@@ -1,29 +1,27 @@
 <?php
-
 /**
- * Autoload class helper to call class methods by 
- * using Laravel 4 alike mechanism via pseudo-static 
- * calling and by-pass variables to other method 
- * which simplifies storing same class instace 
- * without using global keyword quite outdated 
- * solution. With composer pakagist psr-0 autoloader 
- * use better, otherwise please declare autoloading 
- * in psr-0 (or 4) PHP default order by looking via 
- * folder alike class namespaces, etc.
+ * This file is part of Gubnota/smart_loader.php.
+ * (A Gubnota smart_loader implementation in PHP)
+ * (c) 2014-2016 Vladislav Muravyev
  *
- * @copyright 	2014 Vladislav Muravyev
- * @link 		http://gubnota.ru
- * @author 		Vladislav Muravyev
+ * For the full copyright and license information, please look at the LICENSE file in project link
  *
- */
-// Instead of Composer autoload, you can also use default autoload implementation
+ * Gubnota/smart_loader is a class-helper to pseudo-statically load classes and 
+ * simplifies re-using instances throughout all application code. 
+ *
+ * @copyright	2014 Vladislav Muravyev
+ * {@link https://github.com/gubnota/smart_loader}
+ * @author		Vladislav Muravyev {@link http://gubnota.ru}
+ * Usage:		g::John('write_message_to', 'Laura', 'Are you still in the office?');
+*/
+// Instead of Composer autoload, you can setup your own autoload implementation:
 // set_include_path(__DIR__);
 // spl_autoload_register();
 
 namespace Gubnota;
 class Gubnota
 {
-	protected static $globals=[];// для хранения прединициализуемых параметров
+	protected static $globals=[];// for storing pre-inicialized params (для хранения прединициализуемых параметров)
 	// API classes symlinks with their namespaces preceding (aka facades in Laravel 4)
 	protected $classes = array(
 		'John' => 'John\Doe',
@@ -35,7 +33,7 @@ class Gubnota
 	/**
 	 * Here we put initialized instance of this class and 
 	 * utilize it on every static call for everywere
-	 * Сюда прячем инстанс инициализованного класса и его 
+	 * Сюда прячем экземпляр инициализованного класса и его 
 	 * же используем при статических вызовах
 	 *
 	 * @var app
@@ -43,7 +41,7 @@ class Gubnota
 	protected static $app;
 
 	// random number using for recognize whether created instance the same
-	// Случайное число чтобы идентифицировать инстанс оф класс
+	// Случайное число чтобы идентифицировать экземпляр класса
 	protected $rand;
 
 	/**
@@ -67,7 +65,7 @@ class Gubnota
 
 	/**
 	 * method to delete classes facades name
-	 * Магический метод для удаления фасадов
+	 * Метод для удаления фасада
 	 */
 	public function delete_facade($name)
 	{
@@ -78,7 +76,7 @@ class Gubnota
 
 	/**
 	 * method to delete all classes facades names
-	 * Магический метод для удаления всех фасадов
+	 * Метод для удаления всех фасадов
 	 */
 	public function empty_facade()
 	{
@@ -88,7 +86,7 @@ class Gubnota
 
 	/**
 	 * method to get/insert/update classes facades
-	 * Магический метод для получения, создания, замены фасада
+	 * Метод для получения, создания, замены фасада
 	 */
 	public function facade($name=null, $value = null)
 	{
@@ -225,7 +223,7 @@ class Gubnota
 		}
 
 		// If requesing class is not exists - throw error
-		// Если запрошенного Класса не существует - ошибка
+		// Если запрошенного класса не существует - ошибка
 		if(!class_exists($class)){
 			throw new \RuntimeException("Class $class does not exists!");
 		}
@@ -235,7 +233,7 @@ class Gubnota
 		$instance = static::$app;
 
 		if (!array_key_exists($class, $instance::$objects))
-		// Save object for later call
+		// Save object for later calls
 		// Сохраняем для будущих обращений к нему
 			$instance::$objects[$class] = new $class();
 

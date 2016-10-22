@@ -1,35 +1,86 @@
 # Gubnota autoloader class
 
-Autoload class helper to call class methods by 
-using Laravel 4 alike mechanism via pseudo-static 
-calling and by-pass variables to other method 
-which simplifies storing same class instace 
-without using global keyword quite outdated 
-solution. With composer pakagist psr-4 autoloader 
-use better, otherwise please declare autoloading 
-in psr-4 PHP default order by looking via 
-folder alike class namespaces.
+Gubnota/smart_loader (aka `g::` or `\Gubnota\Gubnota`) is a class-
+helper to pseudo-statically load classes and simplifies re-using
+instances throughout all application code. Autoload class helper can
+increase drastically perfomance and convenience by reusing instances
+when calling class methods in pseudo-static way:
+```php
+g::Class('method','arg',...) //or
+g::instance()->Class->method('arg',...)
+```
 
-## Installing
+And by-pass variables to the other method (jquery-way, if you re-write
+your code to return object after calling method, of course). By
+default, it stores only class instace  without needed to use
+``global`` keyword to access.  With composer pakagist psr-4 autoloader
+use better, otherwise please declare autoloading  in psr-4 PHP default
+order by looking via  folder alike class namespaces. Fully compatible
+and tested with >= PHP 5.4 including PHP 7.0.
 
-Simply add `gubnota/smart_loader` to your composer.json and run `composer update`. Or add download packege to according your autoloading pattern subsystem place to load when calling it.
+## Installing by composer
+
+Add `gubnota/smart_loader` string to your composer.json require section and run `composer
+update`:
+```json
+    "require": {
+        "php" : ">=5.4",
+        "gubnota/smart_loader": "dev-master"
+    },
+```
+Alternatively you can [download package](https://github.com/gubnota/smart_loader.git) to include according to your autoloading pattern subsystem.
+
+```php
+include('vendor/gubnota/smart_loader/init.php');
+// then call autoloader in the directory with your project classes:
+set_include_path(__DIR__);
+spl_autoload_register();
+```
 
 ## Included files
 
-* index.php - Example of usage
-* g.php - class name shortcode, for easier calling
+* test.php - Example of usage
+* g.php - class name shortcode (call g:: rather than Gubnota\\Gubnota)
 * Gubnota/Gubnota.php - main class helper that do all the stuff
 * John/Doe.php - class for calling (with only one public method)
+* init.php - include this to autoload
 
-## Autoload issue
-If you are not gonna use Composer psr-4 standard default autoloading class solution, please 
-not forget ti use PHP default one by calling:
-
+## Autoloading classes
+If you are not gonna use Composer psr-0/psr-4 standard
+autoloading class solution, please  don't forget to setup your own:
 ```php
 // Use default autoload implementation
 // set_include_path( __DIR__ );
 spl_autoload_register();
 ```
+
+Or you might using more advances solution which searches several directories:
+```php
+spl_autoload_register(
+function ($class)
+{
+$segments = array_filter(explode("\\", $class));
+$path = __DIR__ . "/app/" . implode('/', $segments) . '.php';
+if (!file_exists($path))
+{
+$path = __DIR__ . "/src/" . implode('/', $segments) . '.php';
+}
+if (!file_exists($path))
+{
+$path = __DIR__ . "/vendor/gubnota/smart_loader/" . implode('/', $segments) . '.php';
+}
+if (file_exists($path)){include $path;}
+else {throw new Exception("Class $class doesn't exist.");}
+}
+);
+```
+## Remapping long names
+smart_loader also able to remap long class names to the short ones:
+```php
+g::instance()->facade('john','John\Doe')->get_instance('john');
+```
+See also at **Facades** section.
+
 ## Usage
 Creating instance of the class for calling only one method: 
 ```php
