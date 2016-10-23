@@ -112,10 +112,9 @@ class Smart_loader
 	foreach ($this->places as $key => $value) {
 	if (substr($value, strlen($value)-1)!=='/') $value.='/';
 	$path = $value . implode('/', $segments) . '.php';
-	if (file_exists($path)) include($path); return;
+	if (file_exists($path)) {include($path); return  true;}
 	}
-	// die($path);
-	throw new Exception("Class $class doesn't exist.");
+	throw new \Exception("Class $class doesn't exist.");
 	}
 
 }
