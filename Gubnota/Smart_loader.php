@@ -106,10 +106,6 @@ class Smart_loader
 	$segments = array_filter(explode("\\", $class));
 	if (empty($this->places)){
 	$this->place('parent',dirname(__DIR__));
-	$this->place('app',dirname(dirname(dirname(dirname(__DIR__)))) . "/app/");
-	$this->place('src',dirname(dirname(dirname(dirname(__DIR__)))) . "/src/");
-	$this->place('vendor',dirname(dirname(dirname(dirname(__DIR__)))) . "/vendor/");
-	$this->place('gubnota',dirname(dirname(dirname(dirname(__DIR__)))) . "/vendor/gubnota/smart_loader/");
 	}
 	print_r($this->places);
 	foreach ($this->places as $key => $value) {
