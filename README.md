@@ -7,8 +7,10 @@ re-initialize new instance, each instance stored in global object).
 Autoload class helper increases drastically perfomance and 
 convenience by reusing instances when calling class methods in pseudo-static way:
 ```php
+<?php
 g::Class('method','arg',...) //or
 g::instance()->Class->method('arg',...)
+?>
 ```
 
 You can by-pass variables to the other calee (method) in jQuery-way. By
@@ -30,8 +32,10 @@ update`:
 Alternatively you can [download package](https://github.com/gubnota/smart_loader/archive/master.zip) to include according to your autoloading pattern subsystem.
 
 ```php
+<?php
 include('smart_loader-master/init.php');
 
+?>
 ```
 
 ## Included files
@@ -46,32 +50,40 @@ include('smart_loader-master/init.php');
 If you are not gonna use Composer psr-4 standard
 autoloading class solution, please  don't forget to setup your own:
 ```php
+<?php
 // Use g:: default autoload implementation
 include(__DIR__.'/vendor/gubnota/smart_loader/init.php');
+?>
 ```
 
 You might want to use more advanced usage by adding extra directories 
 to search:
 ```php
+<?php
 include(__DIR__.'/vendor/gubnota/smart_loader/Gubnota/Smart_loader.php');
 $l = \Gubnota\Smart_loader::instance();
 $l->place('new_place_to_autoload',__DIR__);
 spl_autoload_register([$l, 'load']);
+?>
 ```
 
 When you call smart_autoloader from anywhere of your other places:
 ## Remapping long names
 smart_loader also able to remap long class names to the short ones:
 ```php
+<?php
 g::instance()->facade('john','John\Doe')->get_instance('john');
+?>
 ```
 See also at **Facades** section.
 
 ## Usage
 Creating instance of the class for calling only one method: 
 ```php
+<?php
 $john_doe = new John\Doe(); 
 $john_doe->write_message_to('Samuel Smitters');
+?>
 ```
 
 That usually become a headache: you have to create every 
@@ -85,36 +97,48 @@ you only need this appoach.
 Below several equal ways to initialize and call same class method with help of Gubnota/Gubnota loder:
 
 ```php
+<?php
 \Gubnota\Gubnota::John('write_message_to', 'Laura Smith', 'Are you still there?');
+?>
 ```
 or:
 
 ```php
+<?php
 \Gubnota\Gubnota::instance()->John->write_message_to('Dude', 'Got message?');
+?>
 ```
 or:
 
 ```php
+<?php
 \Gubnota\Gubnota::instance()->John->write_message_to('Dude II', 'Got message?');
+?>
 ```
 or:
 
 ```php
+<?php
 g::{'John\\Doe'}('write_message_to',
     ['Laura Smith','John Smith','John Marcus','Mark Brown'][rand(0,3)],
     ['How long does it take to reach your house?','How about we meet next Tuesday?','Hello there.','Are you still there?'][rand(0,3)]);
+?>
 ```
 or:
 ```php
+<?php
 g::instance()->{'John\\Doe'}->write_message_to(
     ['Laura Smith','John Smith','John Marcus','Mark Brown'][rand(0,3)],
     ['How long does it take to reach your house?','How about we meet next Tuesday?','Hello there.','Are you still there?'][rand(0,3)]);
+?>
 ```
 or:
 
 ```php
+<?php
 $instance = \Gubnota\Gubnota::instance();
 $instance->John->write_message_to('Dude III', 'Got message?');
+?>
 ```
 
 Because individual instances is not creating every tame, it all shares 
@@ -122,33 +146,39 @@ same public porperty with random number in it. Any special case required re-crea
 another instance can be also done easily utilizing the `new` keyword:
 
 ```php
+<?php
 print "g::instance()->rand = ".g::instance()->rand."\n";
 print "\Gubnota\Gubnota::instance()->rand = ".$instance->rand." equals\n";
 print "Creation of new independent pocket of classes:\n";
 $instance2 = new \Gubnota\Gubnota();
 print "\$instance2->rand = $instance2->rand not equals\n";
 print "\Gubnota\Gubnota::instance()->rand = ".$instance->rand." still equals\n";
+?>
 ```
 
 ### Facades
 
 For using name with full namespaces rather than write in every file, better to regsiter it with facades mechanism:
 ```php
+<?php
 g::instance()
 ->empty_facade() // empty all facades default name values
 ->facade('John','John\Doe') // add default one value included with package
 ->facade('Smith','John\Doe') // facades can share same class among different names
 ->delete_facade('Smith') // deletes facade name called 'Smith'
 ;
+?>
 ```
 After you register facade, just call it anywhere like:
 ```php
+<?php
 g::instance()
 ->facade('sw_sendmail','\Swift_SendmailTransport')
 ->facade('sw_smtp','\Swift_SmtpTransport')
 ->facade('sw_message','\Swift_Message')
 ->facade('sw_malier','\Swift_Mailer')
 g::sw_message;
+?>
 ```
 
 ## Installing with composer
@@ -174,6 +204,7 @@ Currently the Gubnota\smart_loader or `g` symlink still lack a lot of config opt
 If autoloader not works be sure to inlude in `composer.json` parent project file `autoload` and `config` directives like:
 
 ```php
+<?php
 {
     "name": "gubnota/your_personal_project",
     "authors": [
@@ -194,7 +225,6 @@ If autoloader not works be sure to inlude in `composer.json` parent project file
         "psr-4": {"": ["app/"]}
     }
 }
-
 ```
 
 You can also autoload files explicily, like:
