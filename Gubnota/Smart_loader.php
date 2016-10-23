@@ -90,6 +90,8 @@ class Smart_loader
 	 */
 	public function place($name=null, $value = null)
 	{
+		if (empty($name) && empty($value))
+    	 return $this->places;
 		if (!empty($name) && empty($value))
     	 return (array_key_exists($name, $this->places) ? $this->places[$name] : $value);
 		if (!empty($name) && !empty($value))
