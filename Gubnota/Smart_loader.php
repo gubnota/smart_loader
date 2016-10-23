@@ -107,7 +107,6 @@ class Smart_loader
 	if (empty($this->places)){
 	$this->place('parent',dirname(__DIR__));
 	}
-	print_r($this->places);
 	foreach ($this->places as $key => $value) {
 	if (substr($value, strlen($value)-1)!=='/') $value.='/';
 	$path = $value . implode('/', $segments) . '.php';
