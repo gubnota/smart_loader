@@ -1,10 +1,11 @@
 # Gubnota autoloader class
 
 Gubnota/smart_loader (aka `g::` or `\Gubnota\Gubnota`) is a class-
-helper to pseudo-statically load classes and simplifies re-using
-instances throughout all application code. Autoload class helper can
-increase drastically perfomance and convenience by reusing instances
-when calling class methods in pseudo-static way:
+helper to load and reuse class instances. It makes re-using 
+class instances easier throughout all application (no need to 
+re-create it, each instance stored in global object). 
+Autoload class helper increases drastically perfomance and 
+convenience by reusing instances when calling class methods in pseudo-static way:
 ```php
 g::Class('method','arg',...) //or
 g::instance()->Class->method('arg',...)
@@ -52,10 +53,7 @@ include(__DIR__.'/vendor/gubnota/smart_loader/init.php');
 You might want to use more advanced usage by adding extra directories 
 to search:
 ```php
-/**
- * simplier autoloader, just include this file to load gubnota/smart_loader
-*/
-include(__DIR__.'/Gubnota/Smart_loader.php');
+include(__DIR__.'/vendor/gubnota/smart_loader/Gubnota/Smart_loader.php');
 $l = \Gubnota\Smart_loader::instance();
 $l->place('new_place_to_autoload',__DIR__);
 spl_autoload_register([$l, 'load']);
