@@ -30,7 +30,7 @@ update`:
 Alternatively you can [download package](https://github.com/gubnota/smart_loader/archive/master.zip) to include according to your autoloading pattern subsystem.
 
 ```php
-include('vendor/gubnota/smart_loader/init.php');
+include('smart_loader-master/init.php');
 
 ```
 
