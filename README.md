@@ -134,7 +134,7 @@ print "\Gubnota\Gubnota::instance()->rand = ".$instance->rand." still equals\n";
 
 ### Facades
 
-For using name with full namespaces rather than write in every file, better to regsiter it with fasades mechanism:
+For using name with full namespaces rather than write in every file, better to regsiter it with facades mechanism:
 ```php
 g::instance()
 ->empty_facade() // empty all facades default name values
