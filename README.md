@@ -3,7 +3,7 @@
 Gubnota/smart_loader (aka `g::` or `\Gubnota\Gubnota`) is a class-
 helper to load and reuse class instances. It makes re-using 
 class instances easier throughout all application (no need to 
-re-create it, each instance stored in global object). 
+re-initialize new instance, each instance stored in global object). 
 Autoload class helper increases drastically perfomance and 
 convenience by reusing instances when calling class methods in pseudo-static way:
 ```php
@@ -15,7 +15,7 @@ You can by-pass variables to the other calee (method) in jQuery-way. By
 default, `g::` stores only one class instace and re-use it when calling 
 the same class from other place. Autoloader can be used two ways: 
 composer pakagist default psr-4 autoloader, and `g::` own autoloader. 
-Fully compatible and work with >= PHP 5.4, PHP 7.0.
+Fully compatible with >= PHP 5.4, PHP 7.0.
 
 ## Installing by composer
 
