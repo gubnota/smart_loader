@@ -14,9 +14,6 @@
  * @author		Vladislav Muravyev {@link http://gubnota.ru}
  * Usage:		g::John('write_message_to', 'Laura', 'Are you still in the office?');
 */
-// Instead of Composer autoload, you can setup your own autoload implementation:
-// set_include_path(__DIR__);
-// spl_autoload_register();
 
 namespace Gubnota;
 class Gubnota

@@ -10,13 +10,11 @@ g::Class('method','arg',...) //or
 g::instance()->Class->method('arg',...)
 ```
 
-And by-pass variables to the other method (jquery-way, if you re-write
-your code to return object after calling method, of course). By
-default, it stores only class instace  without needed to use
-``global`` keyword to access.  With composer pakagist psr-4 autoloader
-use better, otherwise please declare autoloading  in psr-4 PHP default
-order by looking via  folder alike class namespaces. Fully compatible
-and tested with >= PHP 5.4 including PHP 7.0.
+You can by-pass variables to the other calee (method) in jQuery-way. By
+default, `g::` stores only one class instace and re-use it when calling 
+the same class from other place. Autoloader can be used two ways: 
+composer pakagist default psr-4 autoloader, and `g::` own autoloader. 
+Fully compatible and work with >= PHP 5.4, PHP 7.0.
 
 ## Installing by composer
 
@@ -28,13 +26,11 @@ update`:
         "gubnota/smart_loader": "dev-master"
     },
 ```
-Alternatively you can [download package](https://github.com/gubnota/smart_loader.git) to include according to your autoloading pattern subsystem.
+Alternatively you can [download package](https://github.com/gubnota/smart_loader/archive/master.zip) to include according to your autoloading pattern subsystem.
 
 ```php
 include('vendor/gubnota/smart_loader/init.php');
-// then call autoloader in the directory with your project classes:
-set_include_path(__DIR__);
-spl_autoload_register();
+
 ```
 
 ## Included files
@@ -46,34 +42,26 @@ spl_autoload_register();
 * init.php - include this to autoload
 
 ## Autoloading classes
-If you are not gonna use Composer psr-0/psr-4 standard
+If you are not gonna use Composer psr-4 standard
 autoloading class solution, please  don't forget to setup your own:
 ```php
-// Use default autoload implementation
-// set_include_path( __DIR__ );
-spl_autoload_register();
+// Use g:: default autoload implementation
+include(__DIR__.'/vendor/gubnota/smart_loader/init.php');
 ```
 
-Or you might using more advances solution which searches several directories:
+You might want to use more advanced usage by adding extra directories 
+to search:
 ```php
-spl_autoload_register(
-function ($class)
-{
-$segments = array_filter(explode("\\", $class));
-$path = __DIR__ . "/app/" . implode('/', $segments) . '.php';
-if (!file_exists($path))
-{
-$path = __DIR__ . "/src/" . implode('/', $segments) . '.php';
-}
-if (!file_exists($path))
-{
-$path = __DIR__ . "/vendor/gubnota/smart_loader/" . implode('/', $segments) . '.php';
-}
-if (file_exists($path)){include $path;}
-else {throw new Exception("Class $class doesn't exist.");}
-}
-);
+/**
+ * simplier autoloader, just include this file to load gubnota/smart_loader
+*/
+include(__DIR__.'/Gubnota/Smart_loader.php');
+$l = \Gubnota\Smart_loader::instance();
+$l->place('new_place_to_autoload',__DIR__);
+spl_autoload_register([$l, 'load']);
 ```
+
+When you call smart_autoloader from anywhere of your other places:
 ## Remapping long names
 smart_loader also able to remap long class names to the short ones:
 ```php
