@@ -114,7 +114,7 @@ class Smart_loader
 	$path = $value . implode('/', $segments) . '.php';
 	if (file_exists($path)) {include($path); return  true;}
 	}
-	throw new \Exception("Class $class doesn't exist.");
+//	throw new \Exception("Class $class doesn't exist.");
 	}
 
 }
