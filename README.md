@@ -8,8 +8,8 @@ Autoload class helper increases drastically perfomance and
 convenience by reusing instances when calling class methods in pseudo-static way:
 ```php
 <?php
-g::Class('method','arg',...) //or
-g::instance()->Class->method('arg',...)
+g::Class('method','arg',...); //or
+g::instance()->Class->method('arg',...);
 ?>
 ```
 
@@ -34,7 +34,6 @@ Alternatively you can [download package](https://github.com/gubnota/smart_loader
 ```php
 <?php
 include('smart_loader-master/init.php');
-
 ?>
 ```
 
@@ -51,7 +50,6 @@ If you are not gonna use Composer psr-4 standard
 autoloading class solution, please  don't forget to setup your own:
 ```php
 <?php
-// Use g:: default autoload implementation
 include(__DIR__.'/vendor/gubnota/smart_loader/init.php');
 ?>
 ```
@@ -62,7 +60,7 @@ to search:
 <?php
 include(__DIR__.'/vendor/gubnota/smart_loader/Gubnota/Smart_loader.php');
 $l = \Gubnota\Smart_loader::instance();
-$l->place('new_place_to_autoload',__DIR__);
+$l->place('name_for_new_place_to_look_for',__DIR__);
 spl_autoload_register([$l, 'load']);
 ?>
 ```
